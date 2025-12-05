@@ -1,0 +1,22 @@
+{
+  "name": "suenos_valenti_back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dayjs": "^1.11.19",
+    "ejs": "^3.1.10",
+    "express": "^5.2.0",
+    "express-session": "^1.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

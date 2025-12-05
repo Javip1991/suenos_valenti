@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Resultados</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Sueños Valenti</h1>
+      <nav>
+        <a class="item" href="/">Inicio</a>
+        <a class="item" href="/registro">Registro</a>
+        <a class="item" href="/temas">Preferencias</a>
+        <a class="item" href="/sesiones">Sesiones</a>
+        <a class="item" href="/login">Login</a>
+        <a class="item" href="/perfil">Mi perfil</a>
+
+        <div class="underline"></div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1>Resumen de los datos introducidos</h1>
+
+      <section class="hero card">
+        <p><strong>Nombre: </strong> <%= nombre %></p>
+        <p><strong>Email: </strong> <%= email %></p>
+
+        <p><strong>Edad: </strong> <%= edad %></p>
+
+        <p><strong>Ciudad: </strong> <%= ciudad %></p>
+
+        <% if (intereses && intereses.length ) { %>
+
+        <p><strong>Intereses: </strong></p>
+
+        <ul>
+          <% intereses.forEach( i => { %>
+
+          <li><%= i %></li>
+
+          <% }) %>
+        </ul>
+
+        <% } %>
+      </section>
+    </main>
+
+    <p>
+      <a href="/registro">Volver al registro de datos</a>
+    </p>
+    <p>
+      <a href="/"> Inicio</a>
+    </p>
+  </body>
+</html>

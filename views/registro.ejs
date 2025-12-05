@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <title>Registro</title>
+  </head>
+  <body>
+
+    <% if (typeof errores !== "undefined" && errores.length) { %>
+        <div style="color : red;">
+
+            <p>Por favor, corrija estos errores</p>
+            <ul>
+
+                <%
+                errores.forEach (e => { 
+                    %>
+                    <li><%= e %></li>
+                <%  }) %>
+
+            </ul>
+
+        </div>
+
+        <% } %>
+
+        <header class="topbar">
+      <h1><a href="/">Sueños Valenti</a></h1>
+      <nav>
+        <a class="item" href="/">Inicio</a>
+        <a class="item" href="/registro">Registro</a>
+        <a class="item" href="/temas">Preferencias</a>
+        <a class="item" href="/sesiones">Sesiones</a>
+        <a class="item" href="/login">Login</a>
+        <a class="item" href="/perfil">Mi perfil</a>
+
+        <div class="underline"></div>
+      </nav>
+    </header>
+
+    <form action="/registro" method="POST">
+
+        <label> Nombre:
+
+            <input type="text" name="nombre" value="<%= nombre || ' ' %>" required />
+
+        </label>
+
+        <p></p>
+
+        <label> Email:
+
+            <input type="text" name="email" value="<%= email || ' ' %>" required />
+
+        </label>
+
+        <p></p>
+     
+        <label> Edad:
+
+            <input type="number" name="edad" min="0" value="<%= edad || ' ' %>" required />
+
+        </label>
+
+        <p></p>
+
+        <label for=""> Ciudad:
+
+            <select name="ciudad">
+                <option value="">Seleccione una ciudad</option>
+                <option value="Madrid" <%= ciudad === 'Madrid' ? 'selected' : '' %> >Madrid</option>
+                <option value="Ourense" <%= ciudad === 'Ourense' ? 'selected' : '' %> >Ourense</option>
+                <option value="Leon" <%= ciudad === 'Leon' ? 'selected' : '' %> >Leon</option>
+                <option value="Bilbao" <%= ciudad === 'Bilbao' ? 'selected' : '' %> >Bilbao</option>
+                
+            </select>
+
+        </label>
+
+        <p></p>
+
+        <fieldset>
+            <label>
+                <input type="checkbox" name="intereses" value="Petanca" <%= (intereses || []).includes('Petanca') ? 'checked' : '' %>
+                />Petanca
+            </label>
+        <label>
+                <input type="checkbox" name="intereses" value="Domino" <%= (intereses || []).includes('Domino') ? 'checked' : '' %>
+                />Dominó
+            </label>
+            <label>
+                <input type="checkbox" name="intereses" value="Croche" <%= (intereses || []).includes('Croche') ? 'checked' : '' %>
+                />Croché
+            </label>
+
+        </fieldset>
+
+        <button type="submit">Enviar seleccion</button>
+
+    </form>
+
+    <p><a href="/">Volver al Inicio</a></p>
+    <p><a href="/perfil">Volver a tu perfil</a></p>
+
+
+  </body>
+</html>

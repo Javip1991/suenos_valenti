@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Temas</title>
+    <style>
+      body.claro {
+        background-color: #44174e;
+        color: #fce9e8;
+      }
+
+      body.oscuro {
+        background-color: #1b1931;
+        color: #fce9e8;
+      }
+    </style>
+  </head>
+  <body class="<%= tema === 'oscuro' ? 'oscuro' : 'claro' %>">
+    <header class="topbar">
+      <h1><a href="/">Sueños Valenti</a></h1>
+      <nav>
+        <a class="item" href="/">Inicio</a>
+        <a class="item" href="/registro">Registro</a>
+        <a class="item" href="/temas">Preferencias</a>
+        <a class="item" href="/sesiones">Sesiones</a>
+        <a class="item" href="/login">Login</a>
+        <a class="item" href="/perfil">Mi perfil</a>
+
+        <div class="underline"></div>
+      </nav>
+    </header>
+    <h1>Tema actual: <% tema %></h1>
+    <p>
+      <a href="/tema/claro">Tema claro</a>
+      <a href="/tema/oscuro">Tema oscuro</a>
+      <a href="/borrar-tema">Borrar tema</a>
+    </p>
+
+    <p><a href="/">Volver al Inicio</a></p>
+    <p><a href="/perfil">Volver al perfil</a></p>
+  </body>
+</html>

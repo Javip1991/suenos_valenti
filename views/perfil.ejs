@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Perfil personal</title>
+  </head>
+  <body>
+
+<header class="topbar">
+      <h1><a href="/">Sueños Valenti</a></h1>
+      <nav>
+        <a class="item" href="/">Inicio</a>
+        <a class="item" href="/registro">Registro</a>
+        <a class="item" href="/temas">Preferencias</a>
+        <a class="item" href="/sesiones">Sesiones</a>
+        <a class="item" href="/login">Login</a>
+        <a class="item" href="/perfil">Mi perfil</a>
+
+        <div class="underline"></div>
+      </nav>
+    </header>
+
+    <main class="container">
+    <h1>Hola, <%= user.nombre %></h1>
+    <section class="hero card">
+    <% if (user.email) { %>
+  <p>Email: <%= user.email %></p>
+  <p>Edad: <%= user.edad %></p>
+  <p>Ciudad: <%= user.ciudad %></p>
+
+  <h3>Intereses:</h3>
+  <ul>
+    <% if (user.intereses && user.intereses.length > 0) { %>
+      <% user.intereses.forEach(i => { %>
+        <li><%= i %></li>
+      <% }) %>
+    <% } else { %>
+      <li>No hay intereses registrados</li>
+    <% } %>
+  </ul>
+<% } else { %>
+  <p>Aún no has completado tu registro de datos.</p>
+  <p><a href="/registro">Completar registro</a></p>
+<% } %>
+    
+    </ul>
+    </section>
+    </main>
+
+    <form method="POST" action="/logout">
+      <button>Cerrar sesion</button>
+      <p><a href="/">Volver al Inicio</a></p>
+    </form>
+  </body>
+</html>

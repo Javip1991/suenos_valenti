@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>LogIn</title>
+  </head>
+  <body>
+    <% if (error) { %>
+    <p style="color: crimson"><%= error %></p>
+    <% } %>
+
+    <header class="topbar">
+      <h1><a href="/">Sueños Valenti</a></h1>
+      <nav>
+        <a class="item" href="/">Inicio</a>
+        <a class="item" href="/registro">Registro</a>
+        <a class="item" href="/temas">Preferencias</a>
+        <a class="item" href="/sesiones">Sesiones</a>
+        <a class="item" href="/login">Login</a>
+        <a class="item" href="/perfil">Mi perfil</a>
+
+        <div class="underline"></div>
+      </nav>
+    </header>
+
+    <h1>LogIn de usuario</h1>
+
+    <form method="POST" action="/login">
+      <label> Usuario: <input type="text" name="usuario" required /></label
+      ><br />
+
+      <label>
+        Contraseña: <input type="password" name="password" required /></label
+      ><br />
+
+      <button>Entrar</button>
+    </form>
+
+    <p><a href="/">Inicio</a></p>
+  </body>
+</html>

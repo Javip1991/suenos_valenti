@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Sesiones</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="/">Sueños Valenti</a></h1>
+      <nav>
+        <a class="item" href="/">Inicio</a>
+        <a class="item" href="/registro">Registro</a>
+        <a class="item" href="/temas">Preferencias</a>
+        <a class="item" href="/sesiones">Sesiones</a>
+        <a class="item" href="/login">Login</a>
+        <a class="item" href="/perfil">Mi perfil</a>
+
+        <div class="underline"></div>
+      </nav>
+    </header>
+    <div class="btncarro">
+      <button id="btnVaciar" class="btn btn-secondary">Vaciar Carrito</button>
+    </div>
+
+    <main class="container">
+      <section class="card">
+        <h3>Sesiones grupales disponibles</h3>
+        <div id="gridProductos" class="grid"></div>
+      </section>
+      <section class="card">
+        <h3>Carrito</h3>
+        <ul id="listaCarrito" class="list"></ul>
+        <div class="cart-summary">
+          <span id="txtUnidades">0 ud</span>
+          <strong id="txtTotal">0.00 €</strong>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
