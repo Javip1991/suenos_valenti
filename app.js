@@ -225,9 +225,8 @@ app.post("/sesiones", (req, res) => {
 })
 
 //================================
-//CREACION DE LA LISTA DE SESIONES
+//CREACION DE LAS TAJETAS DE SESIONES
 //================================
-
 
 
 

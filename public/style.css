@@ -2,6 +2,7 @@
     --cabecera: #1B1931;
     --fondo: #44174E;
     --tarjeta:#662249 ;
+    --tarjeta2:#892d61 ;
     --footer:#ad3679 ;
     --boton: #ED9E59 ;
     --barra: #ea7815 ;
@@ -70,7 +71,7 @@ a:active {
 }
 
 .card {
-    background: var(--tarjeta);
+    background: var(--tarjeta2);
     border: 1px solid #000;
     border-radius: 16px;
     padding: 1.3rem;
@@ -242,4 +243,8 @@ nav .item:nth-child(6):hover ~ .underline{
     text-align: center;
     color: var(--footer);
     padding: 2rem 1rem;
+}
+
+.sesionesT{
+    text-align: center;
 }
