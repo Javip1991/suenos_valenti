@@ -40,6 +40,7 @@
       </nav>
     </header>
 
+<section class="registro">
     <form action="/registro" method="POST">
 
         <label> Nombre:
@@ -52,7 +53,7 @@
 
         <label> Email:
 
-            <input type="text" name="email" value="<%= email || ' ' %>" required />
+            <input type="email" name="email" value="<%= email || ' ' %>" required />
 
         </label>
 
@@ -97,13 +98,24 @@
 
         </fieldset>
 
-        <button type="submit">Enviar seleccion</button>
+        </section>
+        <div class="container">
+
+        <button class="btn2" type="submit">Enviar seleccion</button>
+
+         
+
+     
+    <button class="btn2"><a href="/">Volver al Inicio</a></button>
+    <button class="btn2"><a href="/perfil">Volver a tu perfil</a></button>
+
+    </div>
 
     </form>
 
-    <p><a href="/">Volver al Inicio</a></p>
-    <p><a href="/perfil">Volver a tu perfil</a></p>
 
-
+<footer class="footer">
+      <small>Sueños Valenti · Abriendo tus chakras desde 2025</small>
+    </footer>
   </body>
 </html>

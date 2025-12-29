@@ -25,19 +25,29 @@
       </nav>
     </header>
 
-    <h1>LogIn de usuario</h1>
+    <main class="container">
+      <section class="card">
+        <h1>LogIn de usuario</h1>
+        <form method="POST" action="/login">
+          <label> Usuario: <input type="text" name="usuario" required /></label
+          ><br />
 
-    <form method="POST" action="/login">
-      <label> Usuario: <input type="text" name="usuario" required /></label
-      ><br />
+          <label>
+            Contraseña:
+            <input type="password" name="password" required /></label
+          ><br />
 
-      <label>
-        Contraseña: <input type="password" name="password" required /></label
-      ><br />
-
-      <button>Entrar</button>
-    </form>
-
-    <p><a href="/">Inicio</a></p>
+          <button class="btn">Entrar</button>
+        </form>
+      </section>
+    </main>
+    <div class="container">
+      <button class="btnlgn">
+        <p><a href="/">Inicio</a></p>
+      </button>
+    </div>
+    <footer class="footer">
+      <small>Sueños Valenti · Abriendo tus chakras desde 2025</small>
+    </footer>
   </body>
 </html>

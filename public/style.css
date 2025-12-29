@@ -67,6 +67,7 @@ a:active {
     max-width: 1100px;
     margin: 2rem auto;
     padding: 0 1rem;
+    text-align: center;
 
 }
 
@@ -82,6 +83,19 @@ a:active {
 .hero h2 {
     margin: .2rem 0 .5rem;
     font-size: 1.8rem;
+}
+
+.grid2 ul li {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card h3 {
+    margin: .2rem 0 .5rem;
+    font-size: 1.8rem;
+    text-align: center;
 }
 
 .note {
@@ -157,6 +171,10 @@ nav .item:nth-child(6):hover ~ .underline{
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
 }
 
 .product {
@@ -194,6 +212,17 @@ nav .item:nth-child(6):hover ~ .underline{
     background: var(--boton);
     color: #0b1220;
     font-weight: 700;
+}
+
+.btn2 {
+    border: 0;
+    border-radius: 999px;
+    padding: .55rem .9rem;
+    cursor: pointer;
+    background: var(--boton);
+    color: #0b1220;
+    font-weight: 700;
+    
 }
 
 .btn:hover {
@@ -246,5 +275,16 @@ nav .item:nth-child(6):hover ~ .underline{
 }
 
 .sesionesT{
+    text-align: center;
+}
+
+.registro {
+    background: var(--tarjeta2);
+    border: 1px solid #000;
+    border-radius: 16px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, .25);
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
     text-align: center;
 }

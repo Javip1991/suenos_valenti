@@ -18,11 +18,30 @@ const cookieParser = require("cookie-parser");
 
 const session = require("express-session");
 
+//RUTA PARA GUARDAR LOS DATOS DE USUARIO
+
+const fs = require("fs");
+const rutaUsuarios = path.join(__dirname, "data", "usuarios.json");
+
+//CREACION DE LOGS
+
+const rutaLogs = path.join(__dirname, "data", "logs.txt");
+
+function registrarLogs (mensaje) {
+    const fecha = new Date().toLocaleString("es-ES");
+    const linea = `[${fecha}] ${mensaje}\n`;
+
+    fs.appendFile(rutaLogs, linea, (err) => {
+        if (err){
+            console.error("Error escribiendo log: ", err);
+        }
+    });
+}
+
 //SERVIDOR ESTATICO (/PUBLIC)
 
-
-
 app.set("view engine", "ejs");
+app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
 //CREACION DE COOKIES
@@ -129,16 +148,45 @@ app.post("/registro", requiereLogin, (req, res) => {
         .render("registro", {nombre, email, edad, ciudad, intereses, errores});
     }
 
-    req.session.user = {
-        ...req.session.user, 
-        nombre,
-        email,
-        edad,
-        ciudad,
-        intereses
-    };
+    //CREAR USUARIO
+
+    const usuario = { nombre, email, edad, ciudad, intereses};
     
-    res.redirect("/perfil");
+    //GUARDAR EN EL JSON
+
+    fs.readFile(rutaUsuarios, "utf-8", (err, data) => {
+        if (err) return res.status(500).send("Error leyendo usuarios");
+        let usuarios = [];
+
+        try{
+            usuarios = JSON.parse(data);
+
+        }catch {
+            usuarios = [];
+        }
+
+        const exisite = usuarios.find(u => u.email === email);
+        if (exisite){
+            return res.status(400).render("Registro", {nombre, email, edad, ciudad, intereses, errores: ["El email ya esta registrado"]});
+
+        }
+
+        usuarios.push(usuario);
+
+        fs.writefile(rutaUsuarios, JSON.stringify(usuarios, null, 2),  (err) => {
+            if (err) 
+                return res.status(500).send("Error guardando usuario");
+        });
+
+        req.session.user = usuario;
+
+        registrarLogs(`Nuevo registro: ${usuario.nombre} (${usuario.email})`);
+
+        res.redirect("/perfil");
+
+    });
+
+    
    
 });
 
@@ -158,9 +206,52 @@ app.post("/login", (req, res) => {
 
     if (password === "abcd") {
         req.session.user = req.session.user || {nombre: usuario || "Usuario"};
+        //INICIALIZA CARRITO SI NO EXISTE
+        if (!req.session.carrito) req.session.carrito = [];
         return res.redirect("/perfil");
     }
     res.status(401).render("login", {error: "Usuario o contraseña incorrectos"});
+
+    registrarLog(`Login exitoso: ${req.session.user.nombre || usuario}`);
+
+    registrarLog(`Login fallido: ${usuario || "Desconocido"}`);
+
+});
+
+//GET DEL CARRITO (JSON)
+
+app.get("/carrito", (req, res) => {
+    if(!req.session.user)
+        return res.status(401).json({ error: "No autorizado"});
+    res.json(req.session.carrito || []);
+});
+
+//POST PARA AGREGAR AL CARRITO
+
+app.post("/carrito", (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: "No autorizado" });
+
+    const { id, nombre, precio, cantidad = 1 } = req.body;
+
+    if (!req.session.carrito) req.session.carrito = [];
+
+    const linea = req.session.carrito.find(l => l.id === id);
+    if (linea) {
+        linea.cantidad += cantidad;
+        linea.subtotal = +(linea.cantidad * precio).toFixed(2);
+    } else {
+        req.session.carrito.push({ id, nombre, cantidad, subtotal: +(precio * cantidad).toFixed(2) });
+    }
+
+    res.json(req.session.carrito);
+});
+
+//POST PARA VACIAR EL CARRITO
+
+app.post("/carrito/vaciar", (req, res) => {
+    if (!req.session.user) return res.status(401).json({ error: "No autorizado" });
+    req.session.carrito = [];
+    res.json([]);
 });
 
 
@@ -178,6 +269,10 @@ app.get("/perfil", requiereAuth, (req, res) => {
 //POST DEL PERFIL-LOGOUT
 
 app.post("/logout", (req, res) => {
+    if(req.session.user) {
+        registrarLogs(`Logout: ${req.session.user.nombre} (${req.session.user.email || "sin email"})`);
+}
+
     req.session.destroy(() => {
         res.redirect("/");
     });
@@ -193,6 +288,8 @@ app.get("/tema/:modo", (req, res) => {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
     });
+
+registrarLog(`Cambio de tema a ${modo} por ${req.session.user?.nombre || "Invitado"}`);   
 
 res.redirect("/temas");
 
