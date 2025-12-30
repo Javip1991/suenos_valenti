@@ -113,10 +113,11 @@ app.post("/registro", requiereLogin, (req, res) => {
         intereses = [intereses];
     }
 
+    //VALIDACION DE ERRORES
+
     let errores = [];
     let validaciones = [];
 
-    //VALIDACION DE ERRORES
 
     //VALIDACION DE NOMBRE
 
@@ -173,7 +174,7 @@ app.post("/registro", requiereLogin, (req, res) => {
 
         usuarios.push(usuario);
 
-        fs.writefile(rutaUsuarios, JSON.stringify(usuarios, null, 2),  (err) => {
+        fs.writeFile(rutaUsuarios, JSON.stringify(usuarios, null, 2),  (err) => {
             if (err) 
                 return res.status(500).send("Error guardando usuario");
         });
@@ -212,9 +213,9 @@ app.post("/login", (req, res) => {
     }
     res.status(401).render("login", {error: "Usuario o contraseña incorrectos"});
 
-    registrarLog(`Login exitoso: ${req.session.user.nombre || usuario}`);
+    registrarLogs(`Login exitoso: ${req.session.user.nombre || usuario}`);
 
-    registrarLog(`Login fallido: ${usuario || "Desconocido"}`);
+    registrarLogs(`Login fallido: ${usuario || "Desconocido"}`);
 
 });
 
@@ -254,6 +255,22 @@ app.post("/carrito/vaciar", (req, res) => {
     res.json([]);
 });
 
+//ELIMINAR PRODUCTOS DEL CARRITO
+
+app.post("/carrito/eliminar", (req, res) => {
+  if (!req.session.user) return res.status(401).json({ error: "No autorizado" });
+
+  const { id } = req.body;
+  if (!id) return res.status(400).json({ error: "ID requerido" });
+
+  const index = req.session.carrito.findIndex(l => l.id === id);
+  if (index !== -1) {
+    req.session.carrito.splice(index, 1);
+  }
+
+  res.json(req.session.carrito);
+});
+
 
 
 //GET DEL PERFIL
@@ -289,7 +306,7 @@ app.get("/tema/:modo", (req, res) => {
         maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-registrarLog(`Cambio de tema a ${modo} por ${req.session.user?.nombre || "Invitado"}`);   
+registrarLogs(`Cambio de tema a ${modo} por ${req.session.user?.nombre || "Invitado"}`);   
 
 res.redirect("/temas");
 
@@ -322,7 +339,7 @@ app.post("/sesiones", (req, res) => {
 })
 
 //================================
-//CREACION DE LAS TAJETAS DE SESIONES
+//CREACION DE LAS TARJETAS DE SESIONES
 //================================
 
 

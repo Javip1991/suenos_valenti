@@ -1,12 +1,13 @@
 import { buscarProducto, precioIVA, decimalEuros } from "./productos.js";
 
-export let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+export const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 export async function agregar(idProducto) {
   const p = buscarProducto(idProducto);
   if (!p) return;
 
   const linea = carrito.find(l => l.id === idProducto);
+
   if (linea) {
     linea.cantidad += 1;
     linea.subtotal = +(linea.cantidad * p.precio).toFixed(2);
@@ -20,6 +21,8 @@ export async function agregar(idProducto) {
   }
 
   localStorage.setItem("carrito", JSON.stringify(carrito));
+
+
   dibujarCarrito(carrito, 
     document.querySelector("#listaCarrito"),
     document.querySelector("#txtTotal"),
@@ -38,11 +41,11 @@ export async function agregar(idProducto) {
 }
 
 export function vaciarCarrito() {
-  carrito = [];
+  carrito.length = 0;
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-export function dibujarCarrito(lineas = [], ulCarrito, txtTotal, txtUds) {
+export function dibujarCarrito(lineas, ulCarrito, txtTotal, txtUds) {
   ulCarrito.innerHTML = "";
   let tUnidades = 0;
   let tImporte = 0;
@@ -50,6 +53,15 @@ export function dibujarCarrito(lineas = [], ulCarrito, txtTotal, txtUds) {
   for (const l of lineas) {
     const li = document.createElement("li");
     li.textContent = ` ${l.nombre} - ${l.cantidad} uds - ${decimalEuros(l.subtotal)}`;
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.className = "btn-eliminar";
+    btnEliminar.addEventListener("click", async () => {
+      eliminarProducto(l.id);
+    });
+
+    li.appendChild(btnEliminar);
     ulCarrito.appendChild(li);
 
     tUnidades += l.cantidad;
@@ -58,4 +70,30 @@ export function dibujarCarrito(lineas = [], ulCarrito, txtTotal, txtUds) {
 
   txtUds.textContent = `${tUnidades} ud`;
   txtTotal.textContent = decimalEuros(precioIVA(tImporte));
+}
+
+export async function eliminarProducto(idProducto) {
+  const index = carrito.findIndex(l => l.id === idProducto);
+  if (index !== -1) {
+    carrito.splice(index, 1); // eliminamos del array
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    dibujarCarrito(
+      carrito,
+      document.querySelector("#listaCarrito"),
+      document.querySelector("#txtTotal"),
+      document.querySelector("#txtUnidades")
+    );
+
+    // También eliminamos del carrito de sesión si hay usuario logueado
+    try {
+      await fetch("/carrito/eliminar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: idProducto })
+      });
+    } catch (err) {
+      console.error("Error eliminando producto del carrito en sesión:", err);
+    }
+  }
 }

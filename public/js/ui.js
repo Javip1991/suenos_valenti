@@ -11,6 +11,7 @@ export function renderCatalogo() {
     card.className = "product";
 
     card.innerHTML = `
+    <img src="${p.imagen}" alt="${p.nombre}" class="product-img"/>
       <h4>${p.nombre}</h4>
       <p>Tipo: ${p.tipo}</p>
       <p class="price">${p.precio.toFixed(2)} € + IVA</p>
@@ -19,13 +20,9 @@ export function renderCatalogo() {
 
     catalogo.appendChild(card);
   }
-
   
 
-  const nuevoGrid = catalogo.cloneNode(true);
-  catalogo.replaceWith(nuevoGrid);
-
-  nuevoGrid.addEventListener("click", (ev) => {
+  catalogo.addEventListener("click", (ev) => {
     const btn = ev.target.closest("button[data-id]");
     if (!btn) return;
     const id = +btn.dataset.id;
