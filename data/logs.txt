@@ -44,3 +44,10 @@
 [25/1/2026, 10:37:33] Nuevo registro: Javier (fghev@gmail.com)
 [25/1/2026, 10:37:43] Login exitoso: sandra
 [25/1/2026, 10:37:57] Nuevo registro: Javier (4565ye@gmail.com)
+[25/1/2026, 17:36:18] Login exitoso: javier
+[25/1/2026, 17:36:31] Nuevo registro: Javier (lllev@gmail.com)
+[25/1/2026, 17:43:14] Login exitoso: sandra
+[25/1/2026, 17:43:29] Nuevo registro:  sandra (asasasssv@gmail.com)
+[25/1/2026, 17:50:17] Login exitoso: javier
+[25/1/2026, 17:50:31] Nuevo registro: Javier (asccv@gmail.com)
+[25/1/2026, 17:51:02] Logout: Javier (asccv@gmail.com)

@@ -147,5 +147,38 @@
       "Domino",
       "Croche"
     ]
+  },
+  {
+    "nombre": "Javier",
+    "email": "lllev@gmail.com",
+    "edad": "4",
+    "ciudad": "Ourense",
+    "intereses": [
+      "Petanca",
+      "Domino",
+      "Croche"
+    ]
+  },
+  {
+    "nombre": " sandra",
+    "email": "asasasssv@gmail.com",
+    "edad": "5",
+    "ciudad": "Madrid",
+    "intereses": [
+      "Petanca",
+      "Domino",
+      "Croche"
+    ]
+  },
+  {
+    "nombre": "Javier",
+    "email": "asccv@gmail.com",
+    "edad": "7",
+    "ciudad": "Ourense",
+    "intereses": [
+      "Petanca",
+      "Domino",
+      "Croche"
+    ]
   }
 ]

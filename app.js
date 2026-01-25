@@ -10,7 +10,11 @@ require("dayjs/locale/es");
 
 dayjs.locale("es");
 
+app.set("view engine", "ejs");
+
 //LIBRERIA PARA COOKIES
+
+app.use(express.static(path.join(__dirname, "public")));
 
 const cookieParser = require("cookie-parser");
 
@@ -40,7 +44,6 @@ function registrarLogs (mensaje) {
 
 //SERVIDOR ESTATICO (/PUBLIC)
 
-app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
@@ -68,7 +71,6 @@ app.use((req, res, next) => {
 });
 
 
-app.use(express.static(path.join(__dirname, "public")));
 
 function requiereAuth(req,  res, next) {
     if (req.session.user) return next();
