@@ -15,3 +15,32 @@
 [7/1/2026, 19:45:19] Nuevo registro:  menta (ada@gmail.com)
 [7/1/2026, 19:47:38] Cambio de tema a claro por Invitado
 [7/1/2026, 19:47:40] Cambio de tema a oscuro por Invitado
+[25/1/2026, 9:56:27] Nuevo registro: Javier (jpereadev@gmail.com)
+[25/1/2026, 9:56:59] Nuevo registro: Javier (jpereadv@gmail.com)
+[25/1/2026, 10:04:57] Login exitoso: javier
+[25/1/2026, 10:05:09] Nuevo registro: Javier (jpereav@gmail.com)
+[25/1/2026, 10:05:43] Login exitoso: javier
+[25/1/2026, 10:05:54] Nuevo registro: Javier (jpeadev@gmail.com)
+[25/1/2026, 10:11:30] Login exitoso: javier
+[25/1/2026, 10:11:44] Nuevo registro: Javier (jpeev@gmail.com)
+[25/1/2026, 10:12:03] Login exitoso: javier
+[25/1/2026, 10:12:27] Nuevo registro: Javier (adev@gmail.com)
+[25/1/2026, 10:19:13] Login exitoso: javier
+[25/1/2026, 10:19:35] Nuevo registro: Javier (asdasd@gmail.com)
+[25/1/2026, 10:20:02] Login exitoso: sandra
+[25/1/2026, 10:20:17] Nuevo registro:  asdaa (jpadev@gmail.com)
+[25/1/2026, 10:28:20] Login exitoso: sandra
+[25/1/2026, 10:28:33] Nuevo registro: Javier (ev@gmail.com)
+[25/1/2026, 10:28:55] Login exitoso: javier
+[25/1/2026, 10:28:57] Logout: javier (sin email)
+[25/1/2026, 10:29:04] Login exitoso: javier
+[25/1/2026, 10:29:31] Nuevo registro: Javier (jpv@gmail.com)
+[25/1/2026, 10:31:20] Login exitoso: javier
+[25/1/2026, 10:31:33] Nuevo registro: Javier (jas@gmail.com)
+[25/1/2026, 10:36:42] Login exitoso: javier
+[25/1/2026, 10:37:04] Nuevo registro: Javier (dfgrtge@gmail.com)
+[25/1/2026, 10:37:12] Cambio de tema a oscuro por Invitado
+[25/1/2026, 10:37:13] Cambio de tema a claro por Invitado
+[25/1/2026, 10:37:33] Nuevo registro: Javier (fghev@gmail.com)
+[25/1/2026, 10:37:43] Login exitoso: sandra
+[25/1/2026, 10:37:57] Nuevo registro: Javier (4565ye@gmail.com)

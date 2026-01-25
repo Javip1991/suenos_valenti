@@ -55,7 +55,7 @@ app.use(
         cookie: {
             httpOnly: true,
             secure: false,
-            maxAge: 1000 * 30 * 30
+            maxAge: 1000 * 60 * 60 * 24,
         },
 
     })
@@ -84,7 +84,7 @@ function requiereLogin(req, res, next) {
 
 //RUTA GET DE REGISTRO
 
-app.get("/registro", requiereAuth, (req, res) => {
+app.get("/registro", (req, res) => {
     
 
     res.render("registro", {
@@ -100,7 +100,7 @@ app.get("/registro", requiereAuth, (req, res) => {
 
 //RUTA POST DE REGISTRO
 
-app.post("/registro", requiereAuth, (req, res) => {
+app.post("/registro",  (req, res) => {
 
     const nombre = req.body.nombre;
     const email = req.body.email;
@@ -144,9 +144,11 @@ app.post("/registro", requiereAuth, (req, res) => {
     //ERRORES BAD REQUEST
 
     if (errores.length){
-        return res
-        .status(400)
-        .render("registro", {nombre, email, edad, ciudad, intereses, errores});
+       return req.session.save(() => {
+        res
+          .status(400)
+          .render("registro", { nombre, email, edad, ciudad, intereses, errores });
+    });
     }
 
     //CREAR USUARIO
@@ -168,27 +170,29 @@ app.post("/registro", requiereAuth, (req, res) => {
 
         const exisite = usuarios.find(u => u.email === email);
         if (exisite){
-            return res.status(400).render("Registro", {nombre, email, edad, ciudad, intereses, errores: ["El email ya esta registrado"]});
+            return res.status(400).render("registro", {nombre, email, edad, ciudad, intereses, errores: ["El email ya esta registrado"]});
 
         }
 
         usuarios.push(usuario);
 
-        fs.writeFile(rutaUsuarios, JSON.stringify(usuarios, null, 2),  (err) => {
-            if (err) 
-                return res.status(500).send("Error guardando usuario");
-        });
+fs.writeFile(rutaUsuarios, JSON.stringify(usuarios, null, 2), (err) => {
+    if (err) return res.status(500).send("Error guardando usuario");
 
-        req.session.user = usuario;
+   
+    req.session.user = usuario;
 
-        registrarLogs(`Nuevo registro: ${usuario.nombre} (${usuario.email})`);
+    registrarLogs(`Nuevo registro: ${usuario.nombre} (${usuario.email})`);
 
+    
+    req.session.save(() => {
         res.redirect("/perfil");
+        });
 
     });
 
-    
-   
+  });
+
 });
 
 //GET DEL LOGIN
@@ -207,15 +211,21 @@ app.post("/login", (req, res) => {
 
     if (password === "abcd") {
         req.session.user = {nombre: usuario || "Usuario"};
-        //INICIALIZA CARRITO SI NO EXISTE
+        
         if (!req.session.carrito) req.session.carrito = [];
-        return res.redirect("/perfil");
+
+         registrarLogs(`Login exitoso: ${req.session.user.nombre || usuario}`);
+
+        req.session.save(() => {
+        res.redirect("/perfil");
+        });
+        return;
+    }else {
+
+        res.status(401).render("login", {error: "Usuario o contraseña incorrectos"});
+        registrarLogs(`Login fallido: ${usuario || "Desconocido"}`);
+
     }
-    res.status(401).render("login", {error: "Usuario o contraseña incorrectos"});
-
-    registrarLogs(`Login exitoso: ${req.session.user.nombre || usuario}`);
-
-    registrarLogs(`Login fallido: ${usuario || "Desconocido"}`);
 
 });
 

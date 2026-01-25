@@ -32,6 +32,7 @@ export async function agregar(idProducto) {
     try {
         await fetch("/carrito", {
             method: "POST",
+            credentials: "same-origin",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: p.id, nombre: p.nombre, precio: p.precio })
         });
@@ -61,10 +62,6 @@ export function dibujarCarrito(lineas, ulCarrito, txtTotal, txtUds) {
   </div>
   <strong>${decimalEuros(l.subtotal)}</strong>
 `;
-
-
-
-
 
 
     const btnEliminar = document.createElement("button");
