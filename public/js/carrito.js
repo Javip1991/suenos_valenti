@@ -1,6 +1,6 @@
 import { buscarProducto, precioIVA, decimalEuros } from "./productos.js";
 
-export const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+export let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 export async function agregar(idProducto) {
   const p = buscarProducto(idProducto);
@@ -52,7 +52,20 @@ export function dibujarCarrito(lineas, ulCarrito, txtTotal, txtUds) {
 
   for (const l of lineas) {
     const li = document.createElement("li");
-    li.textContent = ` ${l.nombre} - ${l.cantidad} uds - ${decimalEuros(l.subtotal)}`;
+    li.innerHTML = `
+  <span>${l.nombre}</span>
+  <div class="qty-controls">
+    <button class="btn-minus" data-id="${l.id}">−</button>
+    <span>${l.cantidad}</span>
+    <button class="btn-plus" data-id="${l.id}">+</button>
+  </div>
+  <strong>${decimalEuros(l.subtotal)}</strong>
+`;
+
+
+
+
+
 
     const btnEliminar = document.createElement("button");
     btnEliminar.textContent = "Eliminar";
@@ -75,7 +88,7 @@ export function dibujarCarrito(lineas, ulCarrito, txtTotal, txtUds) {
 export async function eliminarProducto(idProducto) {
   const index = carrito.findIndex(l => l.id === idProducto);
   if (index !== -1) {
-    carrito.splice(index, 1); // eliminamos del array
+    carrito.splice(index, 1); 
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
     dibujarCarrito(
@@ -85,7 +98,7 @@ export async function eliminarProducto(idProducto) {
       document.querySelector("#txtUnidades")
     );
 
-    // También eliminamos del carrito de sesión si hay usuario logueado
+    
     try {
       await fetch("/carrito/eliminar", {
         method: "POST",
@@ -97,3 +110,40 @@ export async function eliminarProducto(idProducto) {
     }
   }
 }
+
+function modificarCantidad(idProducto, cambio) {
+  const linea = carrito.find(l => l.id === idProducto);
+  if (!linea) return;
+
+  const precioUnitario = linea.subtotal / linea.cantidad;
+  linea.cantidad += cambio;
+
+  if (linea.cantidad <= 0) {
+    const index = carrito.findIndex(l => l.id === idProducto);
+    if (index !== -1) carrito.splice(index, 1);
+  } else {
+    linea.subtotal = +(precioUnitario * linea.cantidad).toFixed(2);
+  }
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+
+  dibujarCarrito(
+    carrito,
+    document.querySelector("#listaCarrito"),
+    document.querySelector("#txtTotal"),
+    document.querySelector("#txtUnidades")
+  );
+}
+
+document.addEventListener("click", (e) => {
+  const btnPlus = e.target.closest(".btn-plus");
+  const btnMinus = e.target.closest(".btn-minus");
+
+  if (btnPlus) {
+    modificarCantidad(+btnPlus.dataset.id, 1);
+  }
+
+  if (btnMinus) {
+    modificarCantidad(+btnMinus.dataset.id, -1);
+  }
+});

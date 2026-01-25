@@ -6,3 +6,12 @@
 [30/12/2025, 19:34:29] Logout: javier (sin email)
 [30/12/2025, 19:46:27] Logout: javier (sin email)
 [30/12/2025, 20:04:36] Logout: javier (sin email)
+[31/12/2025, 0:03:55] Logout: javier (sin email)
+[31/12/2025, 0:04:26] Logout: javier (sin email)
+[7/1/2026, 19:27:37] Nuevo registro:  menta (javi.p.g.1427@gmail.com)
+[7/1/2026, 19:28:10] Nuevo registro:  menta (assda@gmail.com)
+[7/1/2026, 19:28:47] Nuevo registro:  menta (javi.p.g.14@gmail.com)
+[7/1/2026, 19:36:00] Nuevo registro:  menta (assa@gmail.com)
+[7/1/2026, 19:45:19] Nuevo registro:  menta (ada@gmail.com)
+[7/1/2026, 19:47:38] Cambio de tema a claro por Invitado
+[7/1/2026, 19:47:40] Cambio de tema a oscuro por Invitado

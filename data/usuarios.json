@@ -1,1 +1,49 @@
-[]
+[
+  {
+    "nombre": " menta",
+    "email": "javi.p.g.1427@gmail.com",
+    "edad": "2",
+    "ciudad": "Ourense",
+    "intereses": [
+      "Domino"
+    ]
+  },
+  {
+    "nombre": " menta",
+    "email": "assda@gmail.com",
+    "edad": "2",
+    "ciudad": "Ourense",
+    "intereses": [
+      "Domino"
+    ]
+  },
+  {
+    "nombre": " menta",
+    "email": "javi.p.g.14@gmail.com",
+    "edad": "4",
+    "ciudad": "Madrid",
+    "intereses": [
+      "Petanca",
+      "Domino",
+      "Croche"
+    ]
+  },
+  {
+    "nombre": " menta",
+    "email": "assa@gmail.com",
+    "edad": "2",
+    "ciudad": "Leon",
+    "intereses": [
+      "Domino"
+    ]
+  },
+  {
+    "nombre": " menta",
+    "email": "ada@gmail.com",
+    "edad": "3",
+    "ciudad": "Ourense",
+    "intereses": [
+      "Domino"
+    ]
+  }
+]

@@ -84,7 +84,7 @@ function requiereLogin(req, res, next) {
 
 //RUTA GET DE REGISTRO
 
-app.get("/registro", requiereLogin, (req, res) => {
+app.get("/registro", requiereAuth, (req, res) => {
     
 
     res.render("registro", {
@@ -100,7 +100,7 @@ app.get("/registro", requiereLogin, (req, res) => {
 
 //RUTA POST DE REGISTRO
 
-app.post("/registro", requiereLogin, (req, res) => {
+app.post("/registro", requiereAuth, (req, res) => {
 
     const nombre = req.body.nombre;
     const email = req.body.email;
@@ -206,7 +206,7 @@ app.post("/login", (req, res) => {
     const { usuario, password} = req.body;
 
     if (password === "abcd") {
-        req.session.user = req.session.user || {nombre: usuario || "Usuario"};
+        req.session.user = {nombre: usuario || "Usuario"};
         //INICIALIZA CARRITO SI NO EXISTE
         if (!req.session.carrito) req.session.carrito = [];
         return res.redirect("/perfil");

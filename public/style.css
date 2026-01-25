@@ -295,3 +295,14 @@ nav .item:nth-child(6):hover ~ .underline {
   object-fit: contain;
   border-radius: 10px;
 }
+
+.qty-controls {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.qty-controls button {
+  padding: 2px 8px;
+  font-weight: bold;
+}
